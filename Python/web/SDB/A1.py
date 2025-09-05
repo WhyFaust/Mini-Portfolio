@@ -1,26 +1,33 @@
+import sqlite3
+
 def create():
-    open()
-    cursor.execute('''PRAGMA foreign_keys=on''')
+    conn = sqlite3.connect('quiz.db')
+    cursor = conn.cursor()
+    cursor.execute('PRAGMA foreign_keys=on')
 
-
-    do('''CREATE TABLE IF NOT EXISTS quiz (
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS quiz (
            id INTEGER PRIMARY KEY,
-           name VARCHAR)''')
+           name VARCHAR)
+    ''')
 
-
-    do('''CREATE TABLE IF NOT EXISTS question (
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS question (
                id INTEGER PRIMARY KEY,
                question VARCHAR,
                answer VARCHAR,
                wrong1 VARCHAR,
                wrong2 VARCHAR,
-               wrong3 VARCHAR)''')
+               wrong3 VARCHAR)
+    ''')
 
-
-    do('''CREATE TABLE IF NOT EXISTS quiz_content (
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS quiz_content (
                id INTEGER PRIMARY KEY,
                quiz_id INTEGER,
                question_id INTEGER,
                FOREIGN KEY (quiz_id) REFERENCES quiz (id),
-               FOREIGN KEY (question_id) REFERENCES question (id) )''')
-    close()
+               FOREIGN KEY (question_id) REFERENCES question (id) )
+    ''')
+
+    conn.close()

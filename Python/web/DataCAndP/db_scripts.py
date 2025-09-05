@@ -106,7 +106,7 @@ def add_links():
     close()
  
  
-def get_question_after(last_id=0, vict_id=1):
+def get_question_after(question_id, quiz_id):
     ''' возвращает следующий вопрос после вопроса с переданным id
     для первого вопроса передаётся значение по умолчанию '''
     open()
@@ -116,7 +116,7 @@ def get_question_after(last_id=0, vict_id=1):
     WHERE quiz_content.question_id == question.id
     AND quiz_content.id > ? AND quiz_content.quiz_id == ? 
     ORDER BY quiz_content.id '''
-    cursor.execute(query, [last_id, vict_id] )
+    cursor.execute(query, [question_id, quiz_id] )
  
     result = cursor.fetchone()
     close()
